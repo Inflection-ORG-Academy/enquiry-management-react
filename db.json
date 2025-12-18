@@ -1,0 +1,28 @@
+{
+  "enquiries": [
+    {
+      "id": 1,
+      "name": "Veeru",
+      "mobileNo": "8575485478",
+      "email": "deepak@gmail.com",
+      "enquiryFor": "admission",
+      "message": "Hi, Sir I am interested into your courses"
+    },
+    {
+      "id": "7bb4",
+      "name": "Prit Tiwari",
+      "enquiryFor": "device",
+      "mobileNo": "9506328878",
+      "email": "team@inflection.org.in",
+      "message": "I want to buy your device"
+    },
+    {
+      "id": "4481",
+      "name": "Satyam Maurya",
+      "enquiryFor": "software",
+      "mobileNo": "6393298077",
+      "email": "admin@inflection.org.in",
+      "message": "I am interested"
+    }
+  ]
+}
