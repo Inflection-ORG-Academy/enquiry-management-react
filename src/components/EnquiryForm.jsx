@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const EnquiryForm = () => {
+const EnquiryForm = ({ onSubmit }) => {
   const [name, setName] = useState("");
   const [enquiryFor, setEnquiryFor] = useState("");
   const [mobileNo, setMobileNo] = useState("");
@@ -15,7 +15,14 @@ const EnquiryForm = () => {
     setIsLoading(true);
 
     try {
-      const enquiryDetails = { name, enquiryFor, mobileNo, email, message };
+      const enquiryDetails = {
+        name,
+        enquiryFor,
+        mobileNo,
+        email,
+        message,
+        createdAt: new Date().toISOString(),
+      };
       console.log(enquiryDetails);
 
       await fetch("http://localhost:3000/enquiries", {
@@ -28,7 +35,7 @@ const EnquiryForm = () => {
 
       setIsLoading(false);
       console.log("Form Submitted");
-
+      onSubmit();
       setName("");
       setEmail("");
       setEnquiryFor("");
@@ -41,8 +48,8 @@ const EnquiryForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-5">
-      <h1>Enquiry Form</h1>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 p-5 border">
+      <h1 className="text-2xl font-semibold text-center">Enquiry Form</h1>
 
       <div className="grid gap-1">
         <label htmlFor="name" className="text-sm">
@@ -56,7 +63,7 @@ const EnquiryForm = () => {
           placeholder="Enter Name"
           onChange={(e) => setName(e.target.value)}
           value={name}
-          className="w-full py-1.5 px-2 border border-neutral-700 outline-none focus:border-neutral-900"
+          className="w-full py-1 px-2 border border-neutral-700 outline-none focus:border-neutral-900"
         />
       </div>
       <div className="grid gap-1">
@@ -66,7 +73,7 @@ const EnquiryForm = () => {
         <select
           id="enquiryFor"
           name="enquiryFor"
-          className="w-full py-1.5 px-2 border border-neutral-700 outline-none focus:border-neutral-900"
+          className="w-full py-1 px-2 border border-neutral-700 outline-none focus:border-neutral-900"
           onChange={(e) => setEnquiryFor(e.target.value)}
         >
           <option value="">Choose Enquity For</option>
@@ -89,7 +96,7 @@ const EnquiryForm = () => {
           placeholder="Enter Mobile Number"
           onChange={(e) => setMobileNo(e.target.value)}
           value={mobileNo}
-          className="w-full py-1.5 px-2 border border-neutral-700 outline-none focus:border-neutral-900"
+          className="w-full py-1 px-2 border border-neutral-700 outline-none focus:border-neutral-900"
         />
       </div>
 
@@ -105,7 +112,7 @@ const EnquiryForm = () => {
           placeholder="Enter email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
-          className="w-full py-1.5 px-2 border border-neutral-700 outline-none focus:border-neutral-900"
+          className="w-full py-1 px-2 border border-neutral-700 outline-none focus:border-neutral-900"
         />
       </div>
       <div className="grid gap-1">
@@ -125,7 +132,9 @@ const EnquiryForm = () => {
         ></textarea>
       </div>
 
-      <button type="submit">{isLoading ? "Loading.." : "Submit"}</button>
+      <button type="submit" className="bg-neutral-900 text-neutral-100 py-1">
+        {isLoading ? "Loading.." : "Submit"}
+      </button>
     </form>
   );
 };
